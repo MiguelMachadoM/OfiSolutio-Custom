@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="website_sale.change_brand_plus" inherit_id="website_sale.product">
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[1]" position="before">
+                <div class="col-sm-1 col-md-1 col-lg-1 col-lg-offset-0">
+                    <b>Marca: 
+                        <t t-if="product.product_brand_id">
+                            <hr/>
+                            <div t-if="product.product_brand_id">
+                                <b>Marca: 
+                                    <span class="text-muted" t-field="product.product_brand_id.image" t-field-options='{"widget": "image", "size": [90,90]}'/>
+                                </b>
+                            </div>
+                        </t>
+                    </b>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[1]" position="replace">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <span itemprop="image" t-field="product.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;}"/>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]/hr" position="replace">
+                <div class="col-sm-4 col-md-4 col-lg-3 col-lg-offset-2">
+                    <h1 itemprop="name" t-field="product.name">Product Name</h1>
+                    <span itemprop="url" style="display:none;" t-esc="'/shop/product/%s' % slug(product)"/>
+                    <form t-att-action="keep('/shop/cart/update')" class="js_add_cart_variants" t-att-data-attribute_value_ids="product.product_variant_ids.ids" method="POST">
+                        <div class="js_product">
+                            <t t-placeholder="select">
+                                <input type="hidden" class="product_id" name="product_id" t-att-value="int(product.product_variant_ids[0]) if len(product.product_variant_ids) == 1 else '0'"/>
+                                <t t-call="website_sale.variants">
+                                    <t t-set="ul_class" t-value="'nav-stacked'"/></t>
+                            </t>
+                            <t t-call="website_sale.product_price"/>
+                            <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">Product not available</p>
+                            <a id="add_to_cart" class="btn btn-primary btn-lg mt8 js_check_product a-submit" href="#">Add to Cart</a>
+                        </div>
+                    </form>
+                    <hr t-if="product.description_sale"/>
+                    <div>
+                        <p t-field="product.description_sale" class="text-muted"/>
+                    </div>
+                    <hr/>
+                    <p class="text-muted">Pago Seguro a tráves de Paypal.
+                        <br/>
+Los precios no Incluyen IVA.
+                        <br/>
+Envío gratuito en el Campo de Gibraltar.
+                        <br/>
+Compre ahora, reciba en 2 días
+                    </p>
+                </div>
+            </xpath>
+        </template>
+         <template id="website_sale.change_brand_plus2" inherit_id="website_product_brands.inherited_website_sale_cart_website_product_brands_wk">
+             <xpath expr="//t[@t-if='product.product_brand_id']" position="replace">
+             </xpath>
+        </template>
+    </data>
+</openerp>
