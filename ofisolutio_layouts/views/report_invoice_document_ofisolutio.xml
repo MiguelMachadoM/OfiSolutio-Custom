@@ -2,7 +2,7 @@
 <openerp>
     <data>
         <template id="report_invoice_document_ofisolutio" inherit_id="account.report_invoice_document">
-            <xpath expr="//div[@class='page']" position="replace">
+           <xpath expr="//div[@class='page']" position="replace">
                 <div class="page">
                     <!-- FIRST ROW -->
                     <div class="row mb8" style="border-radius:20px;border:1px solid #00AFA9;background-color:#d9edf7;color:#000000;margin-bottom:5px;text-align:left">
@@ -23,7 +23,7 @@
                             <h4>
                                 <strong>
                                     <span>Nº </span>
-                                    <span t-field="o.number" />
+                                    <span t-field="o.number"/>
                                 </strong>
                             </h4>
                         </div>
@@ -34,22 +34,22 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <strong>FACTURADO A:</strong>
-                                    <br />
+                                    <br/>
                                 </div>
                                 <div class="panel-body">
-                                    <span t-field="o.partner_id" />
-                                    <br />
-                                    <span t-field="o.partner_id.vat" />
-                                    <br />
-                                    <span t-field="o.partner_id.commercial_partner_id.street" />
-                                    <br />
-                                    <span t-field="o.partner_id.commercial_partner_id.zip" />
+                                    <span t-field="o.partner_id"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.vat"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.commercial_partner_id.street"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.commercial_partner_id.zip"/>
                                     <span>, </span>
-                                    <span t-field="o.partner_id.commercial_partner_id.city" />
+                                    <span t-field="o.partner_id.commercial_partner_id.city"/>
                                     <span>, </span>
-                                    <span t-field="o.partner_id.commercial_partner_id.state_id" />
+                                    <span t-field="o.partner_id.commercial_partner_id.state_id"/>
                                     <span>, </span>
-                                    <span t-field="o.partner_id.commercial_partner_id.country_id" />
+                                    <span t-field="o.partner_id.commercial_partner_id.country_id"/>
                                 </div>
                             </div>
                         </div>
@@ -57,27 +57,27 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <strong>Datos Factura:</strong>
-                                    <br />
+                                    <br/>
                                 </div>
                                 <div class="panel-body">
                                     <strong>Fecha:</strong>
-                                    <span t-field="o.date_invoice" />
-                                    <br />
+                                    <span t-field="o.date_invoice"/>
+                                    <br/>
                                     <p t-if="o.payment_term">
                                         <strong>Término: </strong>
-                                        <span t-field="o.payment_term" />
-                                        <br />
+                                        <span t-field="o.payment_term"/>
+                                        <br/>
                                     </p>
                                     <strong>Vencimiento: </strong>
-                                    <span t-field="o.date_due" />
-                                    <br />
+                                    <span t-field="o.date_due"/>
+                                    <br/>
                                     <p t-if="o.origin">
                                         <strong>Referencia: </strong>
-                                        <span t-field="o.origin" />
+                                        <span t-field="o.origin"/>
                                     </p>
                                     <p t-if="o.name">
                                         <strong>Descripción: </strong>
-                                        <span t-field="o.name" />
+                                        <span t-field="o.name"/>
                                     </p>
                                 </div>
                             </div>
@@ -87,8 +87,8 @@
                     <p t-if="o.comment">
                         <div class="row">
                             <div class="col-xs-12  alert alert-info" role="alert">
-                                <span class="glyphicon glyphicon-info-sign" style="font-size:12px;"></span>
-                                <span t-field="o.comment" />
+                                <span class="glyphicon glyphicon-info-sign" style="font-size:12px;"/>
+                                <span t-field="o.comment"/>
                             </div>
                         </div>
                     </p>
@@ -96,34 +96,34 @@
                     <table class="table table-condensed table-striped" style="font-size:10px;">
                         <thead>
                             <tr>
-                                <th>DESCRIPCIÓN</th>
+                                <th>DESCRIPCIÓN </th>
                                 <th>CANT.</th>
-                                <th>PRECIO</th>
-                                <th>DESC(%)</th>
-                                <th>IVA</th>
-                                <th>TOTAL</th>
+                                <th class="text-right">PRECIO</th>
+                                 <th class="text-right" groups="sale.group_discount_per_so_line">Discount (%)</th>
+                                <th class="text-right">IVA</th>
+                                <th  class="text-right">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody class="invoice_tbody">
                             <tr t-foreach="o.invoice_line" t-as="l">
                                 <td>
-                                    <span t-field="l.name" />
+                                    <span t-field="l.name"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="l.quantity" align="right" />
-                                    <span t-field="l.uos_id" groups="product.group_uom" align="right" />
+                                    <span style="" t-field="l.quantity" align="right"/>
+                                    <span t-field="l.uos_id" groups="product.group_uom" align="right"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="l.price_unit" />
+                                    <span t-field="l.price_unit"/>
+                                </td>
+                                 <td class="text-right" groups="sale.group_discount_per_so_line">
+                                      <span t-field="l.discount"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="l.discount" />
+                                    <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))" />
-                                </td>
-                                <td class="text-right">
-                                    <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}" />
+                                    <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                                 </td>
                             </tr>
                         </tbody>
@@ -134,7 +134,7 @@
                             <strong>SubTotal</strong>
                         </div>
                         <div class="col-xs-2">
-                            <span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}" />
+                            <span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                         </div>
                     </div>
                     <!-- FITH ROW -->
@@ -143,7 +143,7 @@
                             <strong>Taxes</strong>
                         </div>
                         <div class="col-xs-2" style="border-bottom: 1px solid;">
-                            <span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}" />
+                            <span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                         </div>
                     </div>
                     <!-- SIXHT ROW -->
@@ -152,7 +152,7 @@
                             <strong>Total</strong>
                         </div>
                         <div class="col-xs-2" style="border-bottom: 2px double;">
-                            <span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}" />
+                            <span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                         </div>
                     </div>
                     <!-- SEVENTH ROW -->
@@ -168,13 +168,13 @@
                             <tbody>
                                 <tr t-foreach="o.tax_line" t-as="t">
                                     <td class="text-right">
-                                        <span t-field="t.name" />
+                                        <span t-field="t.name"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}" />
+                                        <span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}" />
+                                        <span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -183,11 +183,11 @@
                     <div class="row col-xs-12">
                         <p t-if="o.payment_term.note">
                             <strong>Payment Term:</strong>
-                            <span t-field="o.payment_term.note" />
+                            <span t-field="o.payment_term.note"/>
                         </p>
                         <p t-if="o.fiscal_position.note">
                             <strong>Fiscal Position Remark:</strong>
-                            <span t-field="o.fiscal_position.note" />
+                            <span t-field="o.fiscal_position.note"/>
                         </p>
                     </div>
                 </div>
