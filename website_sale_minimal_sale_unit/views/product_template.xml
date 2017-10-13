@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="assets_frontend" inherit_id="website_sale.assets_frontend" name="Minimal Sale Unit JS">
+            <xpath expr="//script[last()]" position="after">
+                <script type="text/javascript" src="/website_sale_minimal_sale_unit/static/src/js/website_sale.js"></script>
+            </xpath>
+        </template>
+
+        <template id="product_minimal_sale_unit" inherit_id="website_sale.product_quantity" name="Minimal Sale Unit">
+            <xpath expr="//input[@name='add_qty']/.." position="before">
+                <div t-if="product.minimal_sale_unit">
+                    Unidad mínima de venta: <span t-esc="int(product.minimal_sale_special_unit) or int(product.minimal_sale_unit)"/>
+                </div>
+            </xpath>
+            <xpath expr="//input[@name='add_qty']" position="attributes">
+                <attribute name="value"></attribute>
+                <attribute name="t-att-value">int(product.minimal_sale_special_unit) or int(product.minimal_sale_unit) or 1</attribute>
+                <attribute name="data-min"></attribute>
+                <attribute name="t-att-data-min">int(product.minimal_sale_special_unit) or int(product.minimal_sale_unit) or 1</attribute>
+            </xpath>
+        </template>
+
+        <template id="cart" inherit_id="website_sale.cart"  name="Shopping Cart">
+            <xpath expr="//input[contains(@class, 'js_quantity')]" position="attributes">
+                <attribute name="data-min"></attribute>
+                <attribute name="t-att-data-min">int(line.product_id.minimal_sale_special_unit) or int(line.product_id.minimal_sale_unit) or 1</attribute>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

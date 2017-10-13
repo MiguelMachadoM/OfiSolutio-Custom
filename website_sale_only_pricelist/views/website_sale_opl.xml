@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="website_sale.product_price_opl" inherit_id="website_sale.product_price">
+            <xpath expr="//h4[1]/span[1]" position="replace">
+                <span t-if="priceCurrency"  style="display:none;">
+                 <span class="text-danger oe_default_price" style="text-decoration: line-through; white-space: nowrap;" t-field="product.lst_price" t-field-options="{               &quot;widget&quot;: &quot;monetary&quot;,               &quot;from_currency&quot;: &quot;product.company_id.currency_id&quot;,               &quot;display_currency&quot;: &quot;user_id.partner_id.property_product_pricelist.currency_id&quot;            }"/>
+                </span>
+            </xpath>
+        </template>
+        <template id="website_sale.products_item_opl" inherit_id="website_sale.products_item">
+            <xpath expr="//del[@class='text-danger mr8']" position="replace">
+                <span t-if="priceCurrency"  style="display:none;">
+                    <del class="text-danger mr8" style="white-space: nowrap;" t-field="product.lst_price" t-field-options="{                   &quot;widget&quot;: &quot;monetary&quot;,                   &quot;from_currency&quot;: &quot;product.company_id.currency_id&quot;,                   &quot;display_currency&quot;: &quot;user_id.partner_id.property_product_pricelist.currency_id&quot;                 }"/>&amp;nbsp;
+                </span>
+            </xpath>
+        </template>
+    </data>
+</openerp>
+
+                
