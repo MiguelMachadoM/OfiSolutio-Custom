@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="website_sale.change_description_sale" inherit_id="website_sale.product">
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]/h1[@itemprop='name']" position="before">
+                <h4 t-if="product.default_code">
+                    <p itemprop="sku" t-field="product.default_code">SKU</p>
+                </h4>
+                <h5 t-if="product.ean13">
+                    <p itemprop="gtin13" t-field="product.ean13">EAN</p>
+                </h5>
+             </xpath>
+
+
+        	 <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[1]/span[@itemprop='image']" position="after">
+        	 	<hr t-if="product.description_sale"/>
+                <div><p  itemprop="description" t-field="product.description_sale" class="text-muted"/></div>
+                <hr/>
+        	 </xpath>
+        	 
+        	 <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]//hr[1]" position="replace">
+        	 </xpath>
+        	 
+        	 <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]/div[1]" position="replace">
+        	 </xpath>
+       </template>
+	</data>
+</openerp>

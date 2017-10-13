@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="website.layout_footer_copyright_debrand" inherit_id="website.layout_footer_copyright">
+        	 <xpath expr="//div[@t-ignore='true']" position="replace">
+        	 </xpath>
+       </template>
+
+       <template id="website.layout_debrand" inherit_id="website.layout">
+        	 <xpath expr="//head/meta[5]" position="replace">
+        	 	<meta name="generator" content="OfiSolutio" />
+        	 </xpath>
+       </template>
+       <template id="ofisolutio_layout" inherit_id="website.layout" name="OfiSolutio_layout" priority="17">
+        <xpath expr="//head//link" position="after">
+          <link rel="shortcut icon" href="/ofisolutio_layouts/static/src/img/favicon.ico" type="image/x-icon"/>
+        </xpath>
+      </template>
+	</data>
+</openerp>

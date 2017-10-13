@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="website_sale.change_description_sale" inherit_id="website_sale.product">
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]//hr[1]" position="replace"></xpath>
+            
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]/div[1]" position="replace"></xpath>
+            
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[2]/h1[@itemprop='name']" position="before">
+                <h4 t-if="product.default_code">
+                    <p itemprop="sku" t-field="product.default_code">SKU</p>
+                </h4>
+                <h5 t-if="product.ean13">
+                    <p itemprop="gtin13" t-field="product.ean13">EAN</p>
+                </h5>
+            </xpath>
+            <xpath expr="//div[@itemscope='itemscope']/section[1]/div[2]/div[1]/span[@itemprop='image']" position="after">
+                <hr t-if="product.description_sale" />
+                <div>
+                    <p itemprop="description" t-field="product.description_sale" class="text-muted" />
+                </div>
+                <hr />
+            </xpath>
+        </template>
+        <template id="ofisolutio_assets_frontend" inherit_id="website_sale.assets_frontend" name="phone_formater">
+            <xpath expr="//script[last()]" position="after">
+                <script type="text/javascript" src="/ofisolutio_layouts/static/src/js/formhelpers_phone.js"></script>
+                <script type="text/javascript" src="/ofisolutio_layouts/static/src/js/formhelpers_number.js"></script>
+            </xpath>
+        </template>
+        <template id="website_sale.checkout_placeholder" inherit_id="website_sale.checkout">
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[1]/input[@type='text']" position="attributes">
+                <attribute name="placeholder">Su nombre completo. Ej. Pedro Perez</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[3]/input[@type='text']" position="attributes">
+                <attribute name="placeholder">Nombre Fiscal de la empresa ej. OfiSolutio Logistic, S.L.</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[4]/input[@type='text']" position="attributes">
+                <attribute name="placeholder">NIF o CIF con ESB12456789 o ES12345678X</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[5]/input[@type='email']" position="attributes">
+                <attribute name="placeholder">Un correo electronico válido ej. pedro@perez.com</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[6]/input[@type='tel']" position="attributes">
+                <attribute name="placeholder">ej. 856124722</attribute>
+                <attribute name="class">form-control bfh-phone</attribute>
+                <attribute name="data-format">+34 ddd dd dd dd</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[7]/input[@type='text']" position="attributes">
+                <attribute name="placeholder">Calle, Av / Núm. / Portal / Piso y/o Puerta</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[9]/input[@type='text']" position="attributes">
+                <attribute name="placeholder">Ciudad o población</attribute>
+            </xpath>
+            <xpath expr="//div[1]/div[1]/form[1]/div[@class='row']/div[1]/div[1]/div[10]/input[@type='text']" position="attributes">
+                <attribute name="class">form-control bfh-number</attribute>
+                <attribute name="placeholder">12345</attribute>
+            </xpath>
+        </template>
+    </data>
+</openerp>
