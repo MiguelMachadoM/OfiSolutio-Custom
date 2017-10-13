@@ -34,46 +34,73 @@
         <template id="report_external_layout_footer_inherit" inherit_id="report.external_layout_footer">
             <xpath expr="//div[@class='footer']" position="replace">
                 <div class="footer">
+                     <t t-if="not company.custom_footer">
                     <!-- FIRST ROW -->
                     <div class="row mb8" style="border-radius:20px;border:1px solid #00AFA9;background-color:#d9edf7;color:#000000;text-align:center">
                         <strong>GRACIAS POR CONFIAR EN NOSOTROS</strong>
                     </div>
                     <!-- SECOND ROW -->
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs-6">
                             <p style="border-radius:20px;border:1px solid #00AFA9;background-color:#d9edf7;color::#000000;text-align:left;padding-left:20px;">
                                 <strong>Información General</strong>
                             </p>
                         </div>
+                        <t t-foreach="company.bank_journal_ids" t-as="journal">
+                        <t t-if="journal.display_on_footer">
                         <div class="col-xs-6">
                             <p style="border-radius:20px;border:1px solid #00AFA9;background-color:#d9edf7;color::#000000;text-align:right;padding-right:20px;">
                                 <strong>Datos Bancarios</strong>
                             </p>
                         </div>
-                    </div>
+                        </t>
+                        </t>
+                    </div> -->
                     <!-- THIRD ROW -->
-                    <div class="row">
+                    <div class="row mb8" style="border-radius:20px;border:1px solid #00AFA9;color::#000000;text-align:left;padding-left:20px;">
+                        <ul class="list-inline">
+                            <t t-set="company" t-value="company.sudo()"/>
+                            <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+
+                            <li t-if="company.fax and company.phone">&amp;bull;</li>
+                            <li t-if="company.fax">Fax: <span t-field="company.fax"/></li>
+
+                            <li t-if="company.email and company.fax or company.email and company.phone">&amp;bull;</li>
+                            <li t-if="company.email">Email: <span t-field="company.email"/></li>
+
+                            <li t-if="company.website and company.email or company.website and company.fax or company.website and company.phone">&amp;bull;</li>
+                            <li t-if="company.website">Website: <span t-field="company.website"/></li>
+                        </ul>
+                        <ul t-if="not company.custom_footer" class="list-inline" name="financial_infos">
+                            <li t-if="company.vat">TIN: <span t-field="company.vat"/></li>
+                        </ul>
+                       <ul class="list-inline">
+                            <li>Page:</li>
+                            <li><span class="page"/></li>
+                            <li>/</li>
+                            <li><span class="topage"/></li>
+                        </ul>
+                        
+                        
+                        
                         <div class="col-xs-6" style="text-align:right">
-                            <p style="border-radius:20px;border:1px solid #00AFA9;color::#000000;text-align:left;padding-left:20px;">
-                                <strong>NIF:</strong>
-                                <span t-field="company.vat" />
-                                <br />
-                                <strong>email:</strong>
-                                <span t-field="company.email" />
-                                <br />
-                                <strong>Web:</strong>
-                                <span t-field="company.website" />
-                                <br />
-                            </p>
-                        </div>
-                        <div class="col-xs-6" style="text-align:right">
-                            <p style="border-radius:20px;border:1px solid #00AFA9;color::#000000;text-align:right;padding-right:20px;">
-                                <strong>Banco:</strong>   LA CAIXA
-                                <br /><strong>Swift:</strong>   CAIXESBBXXX
-                                <br /><strong>IBAN:</strong>    ES85 2100 8508 5102 0004 4928
-                                <br /></p>
+                            <t t-set="is_first" t-value="True"/>
+                                <t t-foreach="company.bank_journal_ids" t-as="journal">
+                                    <t t-set="bank_acc" t-value="journal.bank_account_id"/>
+                                    <t t-if="journal.display_on_footer">
+                                    <p style="border-radius:20px;border:1px solid #00AFA9;color::#000000;text-align:left;padding-left:20px;"> 
+                                        <t t-if="(is_first and company.vat) or (not is_first)">
+                                            <span t-esc="bank_acc.bank_name"/>
+                                        <br/><t t-if="bank_acc.bank_bic"> (<span t-esc="bank_acc.bank_bic"/>):</t> 
+                                        <br/><span t-esc="bank_acc.acc_number"/>
+                                        <t t-set="is_first" t-value="False"/>
+                                        </t>
+                                </p>
+                                    </t>
+                                </t>
                         </div>
                     </div>
+                </t>
                 </div>
             </xpath>
         </template>
