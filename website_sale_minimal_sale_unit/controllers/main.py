@@ -4,10 +4,10 @@
 ##############################################################################
 
 import logging
-from openerp import SUPERUSER_ID
-from openerp.addons.website_sale.controllers.main import website_sale
-from openerp import http
-from openerp.http import request
+from odoo import SUPERUSER_ID
+from odoo.addons.website_sale.controllers.main import website_sale
+from odoo import http
+from odoo.http import request
 
 logger = logging.getLogger(__name__)
 
