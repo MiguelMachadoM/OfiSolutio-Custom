@@ -21,9 +21,9 @@
 
 {
     'name': 'Minimum sale unit',
-    'version': '1.0',
-    'category': 'Sales Management',
-    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
+    'version': '10.0.0.0.1',
+    'category': 'Sales',
+    'author': 'Pedro M. Baeza','Miguel Machado',
     'website': 'http://www.serviciosbaeza.com',
     'depends': [
         'product',
