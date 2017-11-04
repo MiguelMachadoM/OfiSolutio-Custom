@@ -10,9 +10,9 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     minimal_sale_unit = fields.Float(
-        digits_compute=dp.get_precision('Product Unit of Measure'),
+        digits=dp.get_precision('Product Unit of Measure'),
         string="UMV")
     minimal_sale_special_unit = fields.Float(
-        digits_compute=dp.get_precision('Product Unit of Measure'),
+        digits=dp.get_precision('Product Unit of Measure'),
         string="UVE")
 
