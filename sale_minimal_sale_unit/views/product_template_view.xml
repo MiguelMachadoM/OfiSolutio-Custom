@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
 
         <record id="product_template_form_view_umv" model="ir.ui.view">
             <field name="name">product.template.common.form.umv</field>
             <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
             <field name="arch" type="xml">
                 <group name="sale_condition" position="inside">
                     <field name="minimal_sale_unit"/>
@@ -15,4 +15,5 @@
         </record>
 
     </data>
-</openerp>
+</odoo>
+
