@@ -21,7 +21,7 @@
 
 {
     'name': 'Minimum sale unit in website',
-    'version': '1.0',
+    'version': '10.0.0.0.1',
     'category': 'Sales Management',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza,'
               'Trey Kilobytes de Soluciones (www.trey.es)',
